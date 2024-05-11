@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 import '../components/square_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,21 +15,28 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
   // text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
 // login method
-  void login() {
+  void login() async {
 // authenticate user first
-
-// once authenticated, send user to homepage
+  try {
+   final user = await _auth.signInWithEmailAndPassword(
+        email: emailController.text, password: passwordController.text);
+   Fluttertoast.showToast(msg: 'Successfully logged in');
+    // once authenticated, send user to homepage
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const HomePage(),
       ),
     );
+    }catch(e){
+    Fluttertoast.showToast(msg:"Invalid Credentials");
+  }
   }
 
 // forgot password
@@ -152,9 +161,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   // email textfield
                   MyTextField(
                     keyboard:TextInputType.emailAddress,
-                    controller: emailController,
+                    //controller: emailController,
                     hintText: 'Email',
                     obscureText: false,
+                    onChange: (value ) {
+                      setState(() {
+                        emailController.text = value;
+                      });
+                    },
+                    validation: null,
                   ),
 
                   const SizedBox(height: 10),
@@ -162,9 +177,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   // password textfield
                   MyTextField(
                     keyboard: TextInputType.text,
-                    controller: passwordController,
+                    //controller: passwordController,
                     hintText: 'Password',
                     obscureText: true,
+                    onChange: (value ) {
+                      setState(() {
+                        passwordController.text = value;
+                      });
+                    },
+                    validation: null,
                   ),
 
                   const SizedBox(height: 10),

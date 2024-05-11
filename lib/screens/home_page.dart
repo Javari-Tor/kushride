@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
-    );
+      body:Center(child:Text('AKRAM')
+    ));
   }
 }

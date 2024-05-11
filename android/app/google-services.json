@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "61909036806",
+    "project_id": "kushride-3c1ce",
+    "storage_bucket": "kushride-3c1ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61909036806:android:e503dc76e3abe04c817887",
+        "android_client_info": {
+          "package_name": "com.tordevelops.kushride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB31HUlUmWKsOfv0VqQmiZ-ctqmMsZpAyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
