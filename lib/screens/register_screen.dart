@@ -3,15 +3,16 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kushride/global/global.dart';
+import 'package:kushride/screens/login_screen.dart';
 import '../components/my_button.dart';
 import '../components/my_phonefield.dart';
 import '../components/my_textfield.dart';
-import 'home_page.dart';
+import 'splash_screen.dart';
 
 
 class RegisterScreen extends StatefulWidget {
-  final void Function()? onTap;
-  const RegisterScreen({super.key, required this.onTap});
+  // final void Function()? onTap;
+  const RegisterScreen({super.key,});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -294,7 +295,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(width: screenWidth * 0.02),
                         GestureDetector(
-                          onTap: widget.onTap,
+                          onTap:(){Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );},
+                          //widget.onTap,
                           child: const Text(
                             'Login now',
                             style: TextStyle(
