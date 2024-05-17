@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 startTimer(){
   Timer(Duration(seconds:3),() async {
     if( await firebaseAuth.currentUser != null){
-      firebaseAuth.currentUser != null ? AssistantMethods.readCurrentOnlineUserInfo() : null;
+      AssistantMethods.readCurrentOnlineUserInfo();
       Navigator.push(
         context,
         MaterialPageRoute(

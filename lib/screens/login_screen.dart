@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kushride/screens/forgot_password_screen.dart';
 import 'package:kushride/screens/register_screen.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -9,7 +10,9 @@ import 'splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   // final void Function()? onTap;
-  const LoginScreen({super.key,});
+  const LoginScreen({
+    super.key,
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -24,20 +27,20 @@ class _LoginScreenState extends State<LoginScreen> {
 // login method
   void login() async {
 // authenticate user first
-  try {
-   final user = await _auth.signInWithEmailAndPassword(
-        email: emailController.text, password: passwordController.text);
-   Fluttertoast.showToast(msg: 'Successfully logged in');
-    // once authenticated, send user to homepage
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
-    }catch(e){
-    Fluttertoast.showToast(msg:"Invalid Credentials");
-  }
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Fluttertoast.showToast(msg: 'Successfully logged in');
+      // once authenticated, send user to homepage
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Invalid Credentials");
+    }
   }
 
 // forgot password
@@ -161,11 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // email textfield
                   MyTextField(
-                    keyboard:TextInputType.emailAddress,
+                    keyboard: TextInputType.emailAddress,
                     //controller: emailController,
                     hintText: 'Email',
                     obscureText: false,
-                    onChange: (value ) {
+                    onChange: (value) {
                       setState(() {
                         emailController.text = value;
                       });
@@ -181,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     //controller: passwordController,
                     hintText: 'Password',
                     obscureText: true,
-                    onChange: (value ) {
+                    onChange: (value) {
                       setState(() {
                         passwordController.text = value;
                       });
@@ -198,7 +201,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: forgotPw,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ForgotPasswordScreen(),
+                              ),
+                            );
+                          },
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(
@@ -302,12 +312,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(width: 4),
                       GestureDetector(
-                        onTap: (){Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterScreen(),
-                          ),
-                        );},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
+                          );
+                        },
                         //widget.onTap,
                         child: const Text(
                           'Register now',
